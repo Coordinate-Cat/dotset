@@ -4,7 +4,7 @@
 </svelte:head>
 
 <div class="content">
-	<h1>About this app</h1>
+	<h2>About this app</h2>
 
 	<p>
 		This is a <a href="https://kit.svelte.dev">SvelteKit</a> app. You can make your own by typing the
@@ -18,17 +18,11 @@
 		Because of that, we don't need to load any JavaScript. Try viewing the page's source, or opening
 		the devtools network panel and reloading.
 	</p>
-
-	<p>
-		The <a href="/todos">TODOs</a> page illustrates SvelteKit's data loading and form handling. Try using
-		it with JavaScript disabled!
-	</p>
 </div>
 
 <style>
 	.content {
-		width: 100%;
-		max-width: var(--column-width);
-		margin: var(--column-margin-top) auto 0 auto;
+		max-width: 600px;
+		margin: 0 auto;
 	}
 </style>
