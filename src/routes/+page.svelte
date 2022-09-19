@@ -76,7 +76,7 @@ source ~/.zshrc`,
 <section class="section_first">
 	<h2>Hacking Machine</h2>
 	<div class="details">
-		<img src="vscode.png" alt="">
+		<img src="vscode.png" alt="vscode">
 		<pre>{d.hackingMachine}</pre>
 	</div>
 </section>
@@ -93,7 +93,7 @@ source ~/.zshrc`,
 			{#if copied === d.nixOne}
 				<i class="mi mi-clipboard-check"><span class="u-sr-only"></span></i>
 			{:else}
-				<span>Copy</span>
+				<i class="mi mi-clipboard"><span class="u-sr-only"></span></i>
 			{/if}
 		</button>
 	</div>
@@ -107,7 +107,7 @@ source ~/.zshrc`,
 			{#if copied === d.nixTwo}
 				<i class="mi mi-clipboard-check"><span class="u-sr-only"></span></i>
 			{:else}
-				<span>Copy</span>
+				<i class="mi mi-clipboard"><span class="u-sr-only"></span></i>
 			{/if}
 		</button>
 	</div>
@@ -115,8 +115,7 @@ source ~/.zshrc`,
 	<hr>
 	<h3>Error</h3>
 
-	<code>{d.nixError}</code>
-	<p>When the above is executed...</p>
+	<p>The following error may occur when the very first command is executed.</p>
 	<pre>{d.errorDetails}</pre>
 	<p>Solution</p>
 	<ul class="solution">
@@ -138,7 +137,7 @@ source ~/.zshrc`,
 			{#if copied === d.hm}
 				<i class="mi mi-clipboard-check"><span class="u-sr-only"></span></i>
 			{:else}
-				<span>Copy</span>
+				<i class="mi mi-clipboard"><span class="u-sr-only"></span></i>
 			{/if}
 		</button>
 	</div>
@@ -152,7 +151,7 @@ source ~/.zshrc`,
 			{#if copied === d.nixPkgs}
 				<i class="mi mi-clipboard-check"><span class="u-sr-only"></span></i>
 			{:else}
-				<span>Copy</span>
+				<i class="mi mi-clipboard"><span class="u-sr-only"></span></i>
 			{/if}
 		</button>
 	</div>
@@ -166,7 +165,7 @@ source ~/.zshrc`,
 			{#if copied === d.nixPath}
 				<i class="mi mi-clipboard-check"><span class="u-sr-only"></span></i>
 			{:else}
-				<span>Copy</span>
+				<i class="mi mi-clipboard"><span class="u-sr-only"></span></i>
 			{/if}
 		</button>
 	</div>
@@ -186,7 +185,7 @@ source ~/.zshrc`,
 			{#if copied === d.config}
 				<i class="mi mi-clipboard-check"><span class="u-sr-only"></span></i>
 			{:else}
-				<span>Copy</span>
+				<i class="mi mi-clipboard"><span class="u-sr-only"></span></i>
 			{/if}
 		</button>
 	</div>
@@ -200,7 +199,7 @@ source ~/.zshrc`,
 			{#if copied === d.writeConfig}
 				<i class="mi mi-clipboard-check"><span class="u-sr-only"></span></i>
 			{:else}
-				<span>Copy</span>
+				<i class="mi mi-clipboard"><span class="u-sr-only"></span></i>
 			{/if}
 		</button>
 	</div>
@@ -214,7 +213,7 @@ source ~/.zshrc`,
 			{#if copied === d.makeSshOne}
 				<i class="mi mi-clipboard-check"><span class="u-sr-only"></span></i>
 			{:else}
-				<span>Copy</span>
+				<i class="mi mi-clipboard"><span class="u-sr-only"></span></i>
 			{/if}
 		</button>
 	</div>
@@ -228,7 +227,7 @@ source ~/.zshrc`,
 			{#if copied === d.makeSshTwo}
 				<i class="mi mi-clipboard-check"><span class="u-sr-only"></span></i>
 			{:else}
-				<span>Copy</span>
+				<i class="mi mi-clipboard"><span class="u-sr-only"></span></i>
 			{/if}
 		</button>
 	</div>
@@ -239,6 +238,10 @@ source ~/.zshrc`,
 <section class="section_fifth">
 	<h2>Install Repository</h2>
 
+	<p>
+		<a href="https://github.com/Coordinate-Cat/darwin" target="blank">Coordinate-Cat/darwin</a>
+	</p>
+
 	<div class="details">
 		<pre>{d.install}</pre>
 		<button use:copy={d.install} on:svelte-copy={() => copied = d.install }>
@@ -246,7 +249,7 @@ source ~/.zshrc`,
 			{#if copied === d.install}
 				<i class="mi mi-clipboard-check"><span class="u-sr-only"></span></i>
 			{:else}
-				<span>Copy</span>
+				<i class="mi mi-clipboard"><span class="u-sr-only"></span></i>
 			{/if}
 		</button>
 	</div>
@@ -266,13 +269,16 @@ section{
 	padding: $section-pad;
 	border: 4px solid var(--main-color);
 	background-color: var(--firstly-color);
+	&:first-child {
+		margin-top: 0;
+	}
 	&:last-child {
-		margin-bottom: 500px;
+		margin-bottom: 600px;
 	}
 }
 
 .solution {
-	margin-left: 20px;
+	margin-left: 30px;
 	li {
 		list-style-type: decimal;
 	}
@@ -304,5 +310,9 @@ button {
 		color: var(--main-color);
 		background-color: var(--sub-color);
 	}
+}
+
+i.mi, .mi-clipboard-check, .mi-clipboard {
+	font-size: 1.5rem;
 }
 </style>

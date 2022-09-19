@@ -1,5 +1,5 @@
 :root {
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: JetBrainsMono,ui-monospace,SFMono-Regular,Menlo,Monaco;
 
 	--bg-color: #c6c1af;
 
@@ -41,7 +41,8 @@ ul, li {
 a {
 	font-weight: 600;
 	text-decoration: none;
-	color: var(--accent-color);
+	text-decoration: underline;
+	color: var(--main-color);
 }
 a:hover {
 	text-decoration: underline;
@@ -71,7 +72,8 @@ code, pre {
 	overflow-x: auto;
 	font-size: 14px;
 	font-weight: 600;
-	font-style: italic;
+	/* font-style: italic; */
+	font-family: JetBrainsMono,ui-monospace,SFMono-Regular,Menlo,Monaco;
 	padding-right: 68px;
 	margin: 10px 0 10px 0;
 	box-sizing: border-box;
