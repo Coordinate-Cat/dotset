@@ -3,24 +3,71 @@
 import { copy } from 'svelte-copy';
 
 let copied = ``;
-const copyTxt = {
+const d = {
+// Hacking Machine
 hackingMachine: `macOS Monterey ver 12.5.1
 MacBook Pro (13-inch, 2017, Two Thunderbolt 3 ports)
 2.3GHz DualCore IntelCore i5
 16GB 2133 MHz LPDDR3
-Intel Iris Plus Graphics 640 1536MB
-`,
+Intel Iris Plus Graphics 640 1536MB`,
 
 nixOne: `sh <(curl -L https://nixos.org/nix/install)`,
 nixTwo: `nix-shell -p nix-info --run "nix-info -m"`,
 
 nixError: `sh <(curl -L https://nixos.org/nix/install)`,
+errorDetails: `error: failed to bootstrap /nix If you enabled FileVault after booting, this is likely a known issue
+with macOS that you'll have to reboot to fix. If you didn't enable FV,
+though, please open an issue describing how the system that you see
+this error on was set up.`,
+
+// home-manager
+hm: `nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+nix-channel --update`,
+
+// nixpkgs
+nixPkgs: `nix-channel --add https://nixos.org/channels/nixpkgs-unstable
+nix-channel --update`,
+
+// Path
+nixPath: `export NIX_PATH=$HOME/.nix-defexpr/channels\${NIX_PATH:+:}$NIX_PATH
+nix-shell '<home-manager>' -A install`,
+
+// gitui config file
+config: `mkdir ~/.ssh
+cd ~/.ssh
+touch config
+vim config`,
+
+// write config file
+writeConfig: `Host github github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/github`,
+
+// make ssh one
+makeSshOne: `ssh-keygen -t ecdsa -C "example@gmail.com"
+pbcopy < ~/.ssh/github.pub
+ssh-add ~/.ssh/github
+ssh -T git@github.com`,
+
+// make ssh two
+makeSshTwo: `pbcopy < ~/.ssh/github.pub
+ssh-add ~/.ssh/github
+ssh -T git@github.com`,
+
+// install repo
+install: `cd ~/.config
+rm -rf nixpkgs
+git clone git@github.com:Coordinate-Cat/darwin.git nixpkgs
+
+home-manager switch
+source ~/.zshrc`,
 }
 
 </script>
 
 <svelte:head>
-	<title>dotset</title>
+	<title>dset</title>
 	<meta name="description" content="" />
 	<link rel="stylesheet" href="https://unpkg.com/mono-icons@1.0.5/iconfont/icons.css">
 </svelte:head>
@@ -29,15 +76,8 @@ nixError: `sh <(curl -L https://nixos.org/nix/install)`,
 <section class="section_first">
 	<h2>Hacking Machine</h2>
 	<div class="details">
-		<pre>{copyTxt.hackingMachine}</pre>
-		<button use:copy={copyTxt.hackingMachine} on:svelte-copy={() => copied = copyTxt.hackingMachine }>
-			<!-- check copy -->
-			{#if copied === copyTxt.hackingMachine}
-				<i class="mi mi-clipboard-check"><span class="u-sr-only"></span></i>
-			{:else}
-				<span>Copy</span>
-			{/if}
-		</button>
+		<img src="vscode.png" alt="">
+		<pre>{d.hackingMachine}</pre>
 	</div>
 </section>
 <!-- first section -->
@@ -47,10 +87,10 @@ nixError: `sh <(curl -L https://nixos.org/nix/install)`,
 	<h2>Nix</h2>
 
 	<div class="details">
-		<pre>{copyTxt.nixOne}</pre>
-		<button use:copy={copyTxt.nixOne} on:svelte-copy={() => copied = copyTxt.nixOne }>
+		<pre>{d.nixOne}</pre>
+		<button use:copy={d.nixOne} on:svelte-copy={() => copied = d.nixOne }>
 			<!-- check copy -->
-			{#if copied === copyTxt.nixOne}
+			{#if copied === d.nixOne}
 				<i class="mi mi-clipboard-check"><span class="u-sr-only"></span></i>
 			{:else}
 				<span>Copy</span>
@@ -58,13 +98,13 @@ nixError: `sh <(curl -L https://nixos.org/nix/install)`,
 		</button>
 	</div>
 
-	<p>Quit Terminal</p>
+	<p>Quit the terminal once.</p>
 
 	<div class="details">
-		<pre>{copyTxt.nixTwo}</pre>
-		<button use:copy={copyTxt.nixTwo} on:svelte-copy={() => copied = copyTxt.nixTwo }>
+		<pre>{d.nixTwo}</pre>
+		<button use:copy={d.nixTwo} on:svelte-copy={() => copied = d.nixTwo }>
 			<!-- check copy -->
-			{#if copied === copyTxt.nixTwo}
+			{#if copied === d.nixTwo}
 				<i class="mi mi-clipboard-check"><span class="u-sr-only"></span></i>
 			{:else}
 				<span>Copy</span>
@@ -72,32 +112,169 @@ nixError: `sh <(curl -L https://nixos.org/nix/install)`,
 		</button>
 	</div>
 
+	<hr>
 	<h3>Error</h3>
-	<code>{copyTxt.nixError}</code>
+
+	<code>{d.nixError}</code>
 	<p>When the above is executed...</p>
+	<pre>{d.errorDetails}</pre>
+	<p>Solution</p>
+	<ul class="solution">
+		<li>mac system settings</li>
+		<li>security and privacy</li>
+		<li>Filevault on/off</li>
+		<li>mac reboot</li>
+	</ul>
 </section>
 <!-- second section -->
 
 <!-- third section -->
 <section class="section_third">
 	<h2>Home-manager</h2>
+	<div class="details">
+		<pre>{d.hm}</pre>
+		<button use:copy={d.hm} on:svelte-copy={() => copied = d.hm }>
+			<!-- check copy -->
+			{#if copied === d.hm}
+				<i class="mi mi-clipboard-check"><span class="u-sr-only"></span></i>
+			{:else}
+				<span>Copy</span>
+			{/if}
+		</button>
+	</div>
+
+	<h3>nixpkgs</h3>
+
+	<div class="details">
+		<pre>{d.nixPkgs}</pre>
+		<button use:copy={d.nixPkgs} on:svelte-copy={() => copied = d.nixPkgs }>
+			<!-- check copy -->
+			{#if copied === d.nixPkgs}
+				<i class="mi mi-clipboard-check"><span class="u-sr-only"></span></i>
+			{:else}
+				<span>Copy</span>
+			{/if}
+		</button>
+	</div>
+
+	<h3>nix path</h3>
+
+	<div class="details">
+		<pre>{d.nixPath}</pre>
+		<button use:copy={d.nixPath} on:svelte-copy={() => copied = d.nixPath }>
+			<!-- check copy -->
+			{#if copied === d.nixPath}
+				<i class="mi mi-clipboard-check"><span class="u-sr-only"></span></i>
+			{:else}
+				<span>Copy</span>
+			{/if}
+		</button>
+	</div>
 </section>
 <!-- third section -->
 
+<!-- fourth section -->
+<section class="section_fourth">
+	<h2>Gitui</h2>
+
+	<p>make config file.</p>
+
+	<div class="details">
+		<pre>{d.config}</pre>
+		<button use:copy={d.config} on:svelte-copy={() => copied = d.config }>
+			<!-- check copy -->
+			{#if copied === d.config}
+				<i class="mi mi-clipboard-check"><span class="u-sr-only"></span></i>
+			{:else}
+				<span>Copy</span>
+			{/if}
+		</button>
+	</div>
+
+	<p>write config.</p>
+
+	<div class="details">
+		<pre>{d.writeConfig}</pre>
+		<button use:copy={d.writeConfig} on:svelte-copy={() => copied = d.writeConfig }>
+			<!-- check copy -->
+			{#if copied === d.writeConfig}
+				<i class="mi mi-clipboard-check"><span class="u-sr-only"></span></i>
+			{:else}
+				<span>Copy</span>
+			{/if}
+		</button>
+	</div>
+
+	<p>make ssh-key.</p>
+
+	<div class="details">
+		<pre>{d.makeSshOne}</pre>
+		<button use:copy={d.makeSshOne} on:svelte-copy={() => copied = d.makeSshOne }>
+			<!-- check copy -->
+			{#if copied === d.makeSshOne}
+				<i class="mi mi-clipboard-check"><span class="u-sr-only"></span></i>
+			{:else}
+				<span>Copy</span>
+			{/if}
+		</button>
+	</div>
+
+	<p>Type "github" in the first question...</p>
+
+	<div class="details">
+		<pre>{d.makeSshTwo}</pre>
+		<button use:copy={d.makeSshTwo} on:svelte-copy={() => copied = d.makeSshTwo }>
+			<!-- check copy -->
+			{#if copied === d.makeSshTwo}
+				<i class="mi mi-clipboard-check"><span class="u-sr-only"></span></i>
+			{:else}
+				<span>Copy</span>
+			{/if}
+		</button>
+	</div>
+</section>
+<!-- fourth section -->
+
+<!-- fifth section -->
+<section class="section_fifth">
+	<h2>Install Repository</h2>
+
+	<div class="details">
+		<pre>{d.install}</pre>
+		<button use:copy={d.install} on:svelte-copy={() => copied = d.install }>
+			<!-- check copy -->
+			{#if copied === d.install}
+				<i class="mi mi-clipboard-check"><span class="u-sr-only"></span></i>
+			{:else}
+				<span>Copy</span>
+			{/if}
+		</button>
+	</div>
+</section>
+<!-- fifth section -->
+
+<!-- sixth section -->
+
+
 <style lang="scss">
+$section-mar: 30px 20px;
 $section-pad: 10px 20px;
-.section{
-	&_first {
-		padding: $section-pad;
-		background-color: var(--firstly-color);
+section{
+  top: 20px;
+	position: sticky;
+	margin: $section-mar;
+	padding: $section-pad;
+	border: 4px solid var(--main-color);
+	background-color: var(--firstly-color);
+	&:last-child {
+		margin-bottom: 500px;
 	}
-	&_second {
-		padding: $section-pad;
-		background-color: var(--secondary-color);
-	}
-	&_third {
-		padding: $section-pad;
-		background-color: var(--tertiary-color);
+}
+
+.solution {
+	margin-left: 20px;
+	li {
+		list-style-type: decimal;
 	}
 }
 

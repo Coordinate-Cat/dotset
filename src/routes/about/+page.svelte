@@ -7,22 +7,19 @@
 	<h2>About this app</h2>
 
 	<p>
-		This is a <a href="https://kit.svelte.dev">SvelteKit</a> app. You can make your own by typing the
-		following into your command line and following the prompts:
+		This is a site created solely for managing <a href="https://github.com/Coordinate-Cat/darwin">dotfiles</a> settings,
+		running on svelte & vite, with maximum design power for document readability.
 	</p>
 
-	<pre>npm create svelte@latest</pre>
-
-	<p>
-		The page you're looking at is purely static HTML, with no client-side interactivity needed.
-		Because of that, we don't need to load any JavaScript. Try viewing the page's source, or opening
-		the devtools network panel and reloading.
-	</p>
 </div>
 
 <style>
 	.content {
 		max-width: 600px;
 		margin: 0 auto;
+		margin: 0 20px;
+	}
+	a {
+		text-decoration: underline;
 	}
 </style>

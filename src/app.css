@@ -6,8 +6,8 @@
 	--main-color: #4c4645;
 	--sub-color: #c6c1af;
 	--firstly-color: #8aa299;
-	--secondary-color: #dea91f;
-	--tertiary-color: #ada149;
+	--secondary-color: #cca84e;
+	--tertiary-color: #aca252;
 	--fourthly-color: #f08038;
 	--fifthly-color: #dad7cc;
 }
@@ -24,15 +24,19 @@ body {
 }
 h1, h2, h3, p {
 	font-weight: 600;
+	margin: 0;
 	color: var(--main-color);
 }
 p {
 	line-height: 1.5;
 }
 ul, li {
+	margin: 0;
+	padding: 0;
 	list-style: none;
 	color: var(--main-color);
-	padding-inline-start: 10px;
+	font-weight: 600;
+	/* padding-inline-start: 10px; */
 }
 a {
 	font-weight: 600;
@@ -47,6 +51,17 @@ h1 {
 }
 h2 {
 	font-size: 1.8rem;
+	position: relative;
+	width: max-content;
+}
+h2:before {
+	content: "";
+	position: absolute;
+	bottom: 6px;
+	right: -10px;
+	background: var(--fourthly-color);
+	width: 6px;
+	height: 6px;
 }
 h3 {
 	font-size: 1.6rem;
@@ -54,17 +69,19 @@ h3 {
 code, pre {
 	padding: 0.5em;
 	overflow-x: auto;
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: 600;
 	font-style: italic;
 	padding-right: 68px;
+	margin: 10px 0 10px 0;
 	box-sizing: border-box;
 	color: var(--main-color);
 	border: 4px solid var(--main-color);
 	background-color: var(--bg-color);
 }
 code {
-	padding: 0.5em;
+	line-height: 3rem;
+	padding: .5rem;
 }
 input, button {
 	font-size: inherit;
@@ -73,8 +90,26 @@ input, button {
 button:focus:not(:focus-visible) {
 	outline: none;
 }
-@media (min-width: 720px) {
+hr {
+	border: 0;
+	margin: 20px 0;
+	border-top: 4px solid var(--main-color);
+}
+img {
+	/* width: 100%; */
+	height: 160px;
+	margin-top: 10px;
+	box-sizing: border-box;
+	border: 4px solid var(--main-color);
+}
+@media (max-width: 720px) {
 	h1 {
 		font-size: 2.4rem;
+	}
+	img {
+		width: 100%;
+		height: auto;
+		max-width: 100%;
+		border: 4px solid var(--main-color);
 	}
 }

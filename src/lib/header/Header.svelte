@@ -9,16 +9,14 @@
 		</a>
 	</div>
 
-	<nav>
-		<ul class="nav">
-			<li class:active={$page.url.pathname === '/'}>
-				<a href="/">Home</a>
-			</li>
-			<li class:active={$page.url.pathname === '/about'}>
-				<a href="/about">About</a>
-			</li>
-		</ul>
-	</nav>
+	<ul class="nav">
+		<li class:active={$page.url.pathname === '/'}>
+			<a href="/">Home</a>
+		</li>
+		<li class="about" class:active={$page.url.pathname === '/about'}>
+			<a href="/about">About</a>
+		</li>
+	</ul>
 </header>
 
 <style lang="scss">
@@ -38,6 +36,10 @@
 .nav {
 	display: flex;
 	font-weight: 600;
+	margin: 10px 0 10px 20px;
+}
+.about {
+	margin-left: 10px;
 }
 .dot {
 	color: var(--fourthly-color);
